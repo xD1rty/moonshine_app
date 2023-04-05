@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'ConnectedDevice.dart';
 
 class BluetoothPage extends StatefulWidget {
@@ -8,22 +8,23 @@ class BluetoothPage extends StatefulWidget {
 }
 
 class _BluetoothPage extends State<BluetoothPage> {
-  FlutterBluePlus flutterBluePlus = FlutterBluePlus.instance;
+  FlutterBlue flutterBlue = FlutterBlue.instance;
   List<ScanResult> scanResults = [];
 
   @override
   void initState() {
     super.initState();
-    flutterBluePlus.scan().listen((scanResult) {
+    flutterBlue.scan().listen((scanResult) {
       setState(() {
         scanResults.add(scanResult);
+        print(scanResult);
       });
     });
   }
 
   @override
   void dispose() {
-    flutterBluePlus.stopScan();
+    flutterBlue.stopScan();
     super.dispose();
   }
 
